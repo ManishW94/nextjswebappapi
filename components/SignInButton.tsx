@@ -1,19 +1,17 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const SignInButton = () => {
+const SignInButton = ({user}) => {
   const navigate = useRouter();
-  const { data: session } = useSession();
-  console.log(session?.user);
-
-  if (session && session.user) {
+    console.log('User', user)
+  if (user) {
     return (
       <div className="flex gap-4 ml-auto">
         <h4 className="text-sky-600">
-          Welcome, {session.user.name}
-          <p className="text-green-600">Role: {session.user.role}</p>
+          Welcome, {user.name}
+          <p className="text-green-600">Role: {user.role}</p>
         </h4>
 
         <button onClick={() => signOut()} className="text-red-600">
